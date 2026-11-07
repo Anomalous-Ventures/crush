@@ -1,43 +1,47 @@
+# Weekly dependency patches across all configured ecosystems.
 version: 2
-
 updates:
-  - package-ecosystem: "gomod"
-    directory: "/"
+- package-ecosystem: gomod
+  labels:
+  - 'area: dependencies'
+  commit-message:
+    prefix: chore
+    include: scope
+  ignore:
+  - dependency-name: github.com/charmbracelet/bubbletea/v2
+    versions:
+    - v2.0.0-beta1
+  - dependency-name: github.com/charmbracelet/lipgloss/v2
+    versions:
+    - v2.0.0-beta1
+  - dependency-name: '*'
+    update-types:
+    - version-update:semver-major
+    - version-update:semver-minor
+  directory: /
+  multi-ecosystem-group: weekly-patches
+  patterns:
+  - '*'
+- package-ecosystem: github-actions
+  labels:
+  - 'area: dependencies'
+  commit-message:
+    prefix: chore
+    include: scope
+  directory: /
+  multi-ecosystem-group: weekly-patches
+  patterns:
+  - '*'
+  ignore:
+  - dependency-name: '*'
+    update-types:
+    - version-update:semver-major
+    - version-update:semver-minor
+multi-ecosystem-groups:
+  weekly-patches:
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "05:00"
-      timezone: "America/New_York"
-    labels:
-      - "area: dependencies"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-    groups:
-      all:
-        patterns:
-          - "*"
-    ignore:
-      - dependency-name: github.com/charmbracelet/bubbletea/v2
-        versions:
-          - v2.0.0-beta1
-      - dependency-name: github.com/charmbracelet/lipgloss/v2
-        versions:
-          - v2.0.0-beta1
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "05:00"
-      timezone: "America/New_York"
-    labels:
-      - "area: dependencies"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-    groups:
-      all:
-        patterns:
-          - "*"
+      interval: weekly
+      day: monday
+      time: 09:00
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 1
