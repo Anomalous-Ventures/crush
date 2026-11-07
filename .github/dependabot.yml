@@ -4,9 +4,6 @@ updates:
 - package-ecosystem: gomod
   labels:
   - 'area: dependencies'
-  commit-message:
-    prefix: chore
-    include: scope
   ignore:
   - dependency-name: github.com/charmbracelet/bubbletea/v2
     versions:
@@ -25,9 +22,6 @@ updates:
 - package-ecosystem: github-actions
   labels:
   - 'area: dependencies'
-  commit-message:
-    prefix: chore
-    include: scope
   directory: /
   multi-ecosystem-group: weekly-patches
   patterns:
@@ -45,3 +39,6 @@ multi-ecosystem-groups:
       time: 09:00
       timezone: America/Los_Angeles
     open-pull-requests-limit: 1
+    commit-message:
+      prefix: chore
+      include: scope
